@@ -1,6 +1,5 @@
-
-set PICO_SDK_PATH=D:\pico\pico-sdk
+if not exist build\ ( md build )
 cd build
-cmake -G "NMake Makefiles" ..
-nmake
+cmake -G "Ninja" ..
+cmake --build . --parallel
 cd ..
