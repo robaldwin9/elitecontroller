@@ -5,6 +5,7 @@
 
 #include "controls.h"
 #include "pico/stdlib.h"
+#include "tusb.h"
 
 Key makeKey( DigitalInput input, uint pin, char event[], char key[])
 {
@@ -52,5 +53,13 @@ void update_key(Key *key)
     {
          key->active = !key->active;
          gpio_put(key->LED_OUTPUT, key->active);
-    }
+
+         if(tud_hid_ready())
+         {
+             uint8_t keycode[6] = {0};
+             keycode[0] = HID_KEY_A;
+             tud_hid_keyboard_report(0, 0, keycode);
+              
+         }
+   }
 }

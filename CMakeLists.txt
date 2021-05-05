@@ -14,6 +14,7 @@ add_executable(${projname}
         controls.c 
         )
 
-target_link_libraries(${projname} pico_stdlib)
+target_include_directories(${projname} PRIVATE ${CMAKE_CURRENT_LIST_DIR})
+target_link_libraries(${projname} PRIVATE pico_stdlib tinyusb_device)
 pico_add_extra_outputs(${projname})
 
